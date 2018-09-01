@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="AlertEnterprise Settings" max_length="40" name="x_aleen_alertenter_alertenterprise_settings" type="collection">
+        <element label="AlertEnterprise server URL" max_length="100" name="alertenterprise_server_url" type="string"/>
+        <element choice="1" label="Assign to" max_length="40" name="assign_to" type="choice">
+            <choice>
+                <element label="User" sequence="1" value="user"/>
+                <element label="Group" sequence="2" value="group"/>
+                <element label="Task assignee" sequence="3" value="task assignee"/>
+                <element label="Task assignee group" sequence="4" value="task assignee group"/>
+            </choice>
+        </element>
+        <element label="Assign to group" max_length="32" name="assign_to_group" reference="sys_user_group" type="reference"/>
+        <element label="Assign to user" max_length="32" name="assign_to_user" reference="sys_user" type="reference"/>
+        <element choice="1" label="Enable workflow" max_length="40" name="enable_workflow" type="choice">
+            <choice>
+                <element label="No" value="No"/>
+                <element label="All" sequence="1" value="Yes"/>
+                <element label="Onboarding" sequence="2" value="onboarding"/>
+                <element label="Offboarding (For AlertEnterprise Activity)" sequence="3" value="offboarding"/>
+            </choice>
+        </element>
+        <element label="Incident template name" max_length="100" name="incident_template_name" type="string"/>
+        <element label="Offboarding activity name" max_length="100" name="offboarding_activity_name" type="string"/>
+        <element label="Offboarding identity action" max_length="100" name="offboarding_identity_action" type="string"/>
+        <element choice="1" label="Offboarding option" max_length="40" name="offboarding_option" type="choice">
+            <choice>
+                <element label="Create Incident" sequence="1" value="create incident"/>
+                <element label="Call AlertEnterprise Activity" sequence="2" value="call alertenterprise activity"/>
+                <element label="Set Employment End Date" sequence="3" value="set employment end date"/>
+            </choice>
+        </element>
+        <element label="Onboarding activity name" max_length="100" name="onboarding_activity_name" type="string"/>
+        <element label="Onboarding identity action" max_length="100" name="onboarding_identity_action" type="string"/>
+        <element label="Password" max_length="255" name="password" type="password2"/>
+        <element label="User name" max_length="100" name="user_name" type="string"/>
+        <index name="index">
+            <element name="assign_to_group"/>
+        </index>
+        <index name="index2">
+            <element name="assign_to_user"/>
+        </index>
+    </element>
+</database>

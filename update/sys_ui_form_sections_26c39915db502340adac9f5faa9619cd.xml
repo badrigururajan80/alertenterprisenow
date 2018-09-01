@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_form_sections form_id="26c39915db502340adac9f5faa9619cd" sys_domain="global" table="x_aleen_alertenter_alertenterprise_settings" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-09-01 08:10:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>76c39915db502340adac9f5faa9619cf</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_aleen_alertenter_alertenterprise_settings" name="x_aleen_alertenter_alertenterprise_settings" sys_domain="global" view="Default view">26c39915db502340adac9f5faa9619cd</sys_ui_form>
+            <sys_ui_section caption="AlertEnterprise Server Settings" display_value="AlertEnterprise Server Settings" name="x_aleen_alertenter_alertenterprise_settings" sys_domain="global" view="Default view">e0d255d1db502340adac9f5faa9619f0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-09-01 08:10:21</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-09-01 08:10:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>32c39915db502340adac9f5faa9619d0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_aleen_alertenter_alertenterprise_settings" name="x_aleen_alertenter_alertenterprise_settings" sys_domain="global" view="Default view">26c39915db502340adac9f5faa9619cd</sys_ui_form>
+            <sys_ui_section caption="Workflow Settings" display_value="Workflow Settings" name="x_aleen_alertenter_alertenterprise_settings" sys_domain="global" view="Default view">eec39915db502340adac9f5faa9619cb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-09-01 08:10:21</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-09-01 08:10:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b6c39915db502340adac9f5faa9619ec</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_aleen_alertenter_alertenterprise_settings" name="x_aleen_alertenter_alertenterprise_settings" sys_domain="global" view="Default view">26c39915db502340adac9f5faa9619cd</sys_ui_form>
+            <sys_ui_section caption="Configuration Settings" display_value="Configuration Settings" name="x_aleen_alertenter_alertenterprise_settings" sys_domain="global" view="Default view">e6c39915db502340adac9f5faa9619cc</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-09-01 08:10:21</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_aleen_alertenter_alertenterprise_settings</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-09-01 08:10:21</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>26c39915db502340adac9f5faa9619cd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_aleen_alertenter_alertenterprise_settings</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+            <sys_update_name>sys_ui_form_sections_26c39915db502340adac9f5faa9619cd</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-09-01 08:10:21</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>
