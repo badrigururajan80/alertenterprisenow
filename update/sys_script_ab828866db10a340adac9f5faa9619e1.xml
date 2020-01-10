@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_aleen_alertenter_alertenterprise_user_info</collection>
+        <condition>previous.alert_status!="Provisioned" &amp;&amp; current.alert_status=="Provisioned"</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Provision of Onboarding Request</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+		gs.debug('Start Update');
+
+		var coreHRTaskGR = new GlideRecordSecure('sn_hr_core_task');
+	gs.debug('Before Read:'+current.alert_task.generated_id);
+		coreHRTaskGR.addQuery('sys_id',current.alert_task.sys_id);
+		coreHRTaskGR.query();
+	gs.debug('After Read');
+		while(coreHRTaskGR.next()){
+			gs.debug('Got Record');
+			coreHRTaskGR.state=3; //Mark the task as Closed Complete
+			gs.debug('Befoere Update');
+			coreHRTaskGR.update();
+			gs.debug('Update Record');
+		}
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-04 23:28:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ab828866db10a340adac9f5faa9619e1</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Provision of Onboarding Request</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_script_ab828866db10a340adac9f5faa9619e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-10-11 00:27:33</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=ab828866db10a340adac9f5faa9619e1"/>
+</record_update>

@@ -1,41 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element label="AlertEnterprise User Info" max_length="40" name="x_aleen_alertenter_alertenterprise_user_info" type="collection">
-        <element choice="1" default="Not Provisioned" label="Alert status" max_length="40" name="alert_status" type="choice">
+        <element choice="1" default="Not Provisioned" label="Alert status" max_length="40" name="alert_status" read_only="true" type="choice">
             <choice>
-                <element label="Not Provisioned" value="Not Provisioned"/>
-                <element label="Pending Termination" value="Pending Termination"/>
-                <element label="Provisioned" value="Provisioned"/>
-                <element label="Provisioning Error" value="Provisioning Error"/>
-                <element label="Provisioning InProgress" value="Provisioning InProgress"/>
-                <element label="Terminated" value="Terminated"/>
-                <element label="Termination InProgress" value="Termination InProgress"/>
+                <element inactive_on_update="false" label="Not Provisioned" value="Not Provisioned"/>
+                <element inactive_on_update="false" label="Pending Termination" value="Pending Termination"/>
+                <element inactive_on_update="false" label="Provisioned" value="Provisioned"/>
+                <element inactive_on_update="false" label="Provisioning Error" value="Provisioning Error"/>
+                <element inactive_on_update="false" label="Provisioning InProgress" value="Provisioning InProgress"/>
+                <element inactive_on_update="false" label="Terminated" value="Terminated"/>
+                <element inactive_on_update="false" label="Termination InProgress" value="Termination InProgress"/>
+                <element inactive_on_update="false" label="NotProvisioned" sequence="0" value="NotProvisioned"/>
+                <element inactive_on_update="false" label="PendingTermination" sequence="0" value="PendingTermination"/>
             </choice>
         </element>
-        <element label="Alert task" max_length="32" name="alert_task" reference="sn_hr_core_task" type="reference"/>
-        <element label="Alert user id" max_length="40" name="alert_user_id" type="string"/>
-        <element label="Assign to group" max_length="32" name="assign_to_group" reference="sys_user_group" type="reference"/>
-        <element label="Assign to user" max_length="32" name="assign_to_user" reference="sys_user" type="reference"/>
-        <element label="Offboarding date" max_length="40" name="offboarding_date" type="glide_date_time"/>
-        <element label="Offboarding request number" max_length="40" name="offboarding_request_number" type="string"/>
-        <element choice="1" label="Offboard Approval Status" max_length="40" name="offboard_approval_status" type="choice">
+        <element label="Alert task" max_length="32" name="alert_task" read_only="true" reference="sn_hr_core_task" type="reference"/>
+        <element label="Alert user id" max_length="40" name="alert_user_id" read_only="true" type="string"/>
+        <element label="Assign to group" max_length="32" name="assign_to_group" read_only="true" reference="sys_user_group" type="reference"/>
+        <element label="Assign to user" max_length="32" name="assign_to_user" read_only="true" reference="sys_user" type="reference"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="AlertEnterprise id" max_length="40" name="number" read_only="true" type="string"/>
+        <element label="Offboarding date" max_length="40" name="offboarding_date" read_only="true" type="glide_date_time"/>
+        <element label="Offboarding request number" max_length="40" name="offboarding_request_number" read_only="true" type="string"/>
+        <element choice="1" label="Offboard approval status" max_length="40" name="offboard_approval_status" read_only="true" type="choice">
             <choice>
-                <element label="Approved" value="Approved"/>
-                <element label="Not Required" value="Not Required"/>
-                <element label="Pending Approval" value="Pending Approval"/>
-                <element label="Rejected" value="Rejected"/>
+                <element inactive_on_update="false" label="Approved" value="Approved"/>
+                <element inactive_on_update="false" label="Not Required" value="Not Required"/>
+                <element inactive_on_update="false" label="Pending Approval" value="Pending Approval"/>
+                <element inactive_on_update="false" label="Rejected" value="Rejected"/>
             </choice>
         </element>
-        <element label="Onboarding request number" max_length="40" name="onboarding_request_number" type="string"/>
-        <element choice="1" default="Not Required" label="Onboard Approval status" max_length="40" name="onboard_approval_status" type="choice">
+        <element label="Onboarding request number" max_length="40" name="onboarding_request_number" read_only="true" type="string"/>
+        <element choice="1" default="Not Required" label="Onboard approval status" max_length="40" name="onboard_approval_status" read_only="true" type="choice">
             <choice>
-                <element label="Approved" value="Approved"/>
-                <element label="Not Required" value="Not Required"/>
-                <element label="Pending Approval" value="Pending Approval"/>
-                <element label="Rejected" value="Rejected"/>
+                <element inactive_on_update="false" label="Approved" value="Approved"/>
+                <element inactive_on_update="false" label="Not Required" value="Not Required"/>
+                <element inactive_on_update="false" label="Pending Approval" value="Pending Approval"/>
+                <element inactive_on_update="false" label="Rejected" value="Rejected"/>
             </choice>
         </element>
-        <element label="Subject person" max_length="32" name="subject_person" reference="sys_user" type="reference"/>
+        <element label="Subject person" max_length="32" name="subject_person" read_only="true" reference="sys_user" type="reference"/>
         <element label="Subject person HR profile" max_length="32" name="subject_person_hr_profile" reference="sn_hr_core_profile" type="reference"/>
         <index name="index">
             <element name="assign_to_group"/>

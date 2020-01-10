@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="wf_workflow_version">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="wf_workflow_version">
     <wf_workflow_version action="INSERT_OR_UPDATE">
         <active>true</active>
         <activity_stages>{"activities":{},"subflows":[],"stages":{},"ends":["f260a1d9db502340adac9f5faa96195b"]}</activity_stages>
@@ -35,12 +34,12 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-01 09:05:31</sys_created_on>
         <sys_id>63ef9d99db502340adac9f5faa9619d6</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-01 09:16:20</sys_updated_on>
+        <sys_updated_on>2018-09-04 23:08:32</sys_updated_on>
         <table>x_aleen_alertenter_alertenterprise_user_info</table>
         <timezone/>
-        <validated>false</validated>
+        <validated>true</validated>
         <workflow display_value="Approve AlertEnterprise Activity">b260a1d9db502340adac9f5faa961959</workflow>
     </wf_workflow_version>
     <wf_workflow action="INSERT_OR_UPDATE">

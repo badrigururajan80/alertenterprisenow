@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_ui_section caption="Workflow Settings" section_id="eec39915db502340adac9f5faa9619cb" sys_domain="global" table="x_aleen_alertenter_alertenterprise_settings" version="3" view="">
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>enable_workflow</element>

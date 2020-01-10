@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update sys_domain="global" table="sys_script">
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
     <sys_script action="INSERT_OR_UPDATE">
         <abort_action>false</abort_action>
         <access>package_private</access>
@@ -29,12 +28,14 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+		gs.debug("Start of termination process");
 
-		var aeSetting = new GlideRecord('x_aleen_alertenter_alertenterprise_settings');		
+		var aeSetting = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_settings');		
 		var offboardActivityName="";
 		var offboardOption="";
 		var incidentTemplateName="";
 		aeSetting.query();
+		gs.debug("Getting of termination setting");
 		while(aeSetting.next()){
 			
 			
@@ -50,15 +51,24 @@
 		}
 		
 		if(offboardOption=="create incident"){
-			var templateGR = new GlideRecord('sys_template');
+			gs.debug("Start of create incident");
+			var templateGR = new GlideRecordSecure('sys_template');
 			templateGR.addQuery("table","incident");
 			templateGR.addQuery("name","AlertEnterprise Incident Template");
 			templateGR.query();
+			gs.debug("QUerying the template");
 			while(templateGR._next()){
-				var incidentGR = new GlideRecord('incident');
+				gs.debug("Before grs");
+				var incidentGR = new GlideRecordSecure('incident');
+				gs.debug("Before init secured");
 				incidentGR.initialize();
-				GlideTemplate.get(templateGR.sys_id).apply(incidentGR);
+				gs.debug("After init:"+templateGR.template);
+				var t = GlideTemplate.get(templateGR.sys_id);
+				gs.debug("T:"+t);
+				t.apply(incidentGR);
+				gs.debug("After apply");
 				var shortDescription = incidentGR.short_description;
+				gs.debug("Short Desc:"+shortDescription);
 				shortDescription =
 					shortDescription.replace("&FirstName",current.subject_person.first_name);
 				shortDescription =
@@ -66,13 +76,16 @@
 				shortDescription =
 					shortDescription.replace("&UserName",current.subject_person.user_name);
 				incidentGR.short_description = shortDescription;
+				gs.debug("Before insert");
 				incidentGR.insert();
+				gs.debug("After insert");
 			
 			
 			}
+			gs.debug("After the query");
 		}
 		if(offboardOption=="call alertenterprise activity"){
-			var coreHRTaskGR = new GlideRecord('sn_hr_core_task');
+			var coreHRTaskGR = new GlideRecordSecure('sn_hr_core_task');
 			coreHRTaskGR.addQuery('sys_id',current.alert_task.sys_id);
 			coreHRTaskGR.query();
 			while(coreHRTaskGR.next()){
@@ -85,7 +98,7 @@
 			
 		}
 		if(offboardOption=="set employment end date" && current.offboarding_date!=null){
-			var coreHRProfileGR = new GlideRecord('sn_hr_core_profile');
+			var coreHRProfileGR = new GlideRecordSecure('sn_hr_core_profile');
 			var hrProfileSysId=current.subject_person_hr_profile.sys_id;
 			coreHRProfileGR.addQuery('sys_id',hrProfileSysId);
 			coreHRProfileGR.query();
@@ -105,7 +118,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c9ddd159db502340adac9f5faa96197a</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>Termination of User in AlertEnterprise</sys_name>
         <sys_overrides/>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
@@ -114,7 +127,7 @@
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_script_c9ddd159db502340adac9f5faa96197a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-01 08:56:08</sys_updated_on>
+        <sys_updated_on>2018-10-11 00:28:43</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

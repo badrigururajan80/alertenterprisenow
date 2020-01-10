@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update sys_domain="global" table="sys_script">
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
     <sys_script action="INSERT_OR_UPDATE">
         <abort_action>false</abort_action>
         <access>package_private</access>
@@ -13,13 +12,13 @@
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_aleen_alertenter_alertenterprise_user_info</collection>
-        <condition>(previous.approval_status!="Approved" &amp;&amp; current.approval_status=="Approved") || (previous.approval_status!="Rejected" &amp;&amp; current.approval_status=="Rejected")||(previous.alert_status!="Provisioned" &amp;&amp; current.alert_status=="Provisioned") </condition>
+        <condition>(previous.onboarding_approval_status!="Approved" &amp;&amp; current.onboard_approval_status=="Approved") || (previous.onboard_approval_status!="Rejected" &amp;&amp; current.onboard_approval_status=="Rejected")</condition>
         <description/>
         <execute_function>false</execute_function>
         <filter_condition/>
         <is_rest>false</is_rest>
         <message/>
-        <name>Approval/Provision of Onboarding</name>
+        <name>Approve/Reject of Onboarding</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -29,15 +28,23 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-
-	if(current.approval_status=="Approved" && previous.approval_status!="Approved"){
+	if(current.onboard_approval_status=="Approved" && previous.onboard_approval_status!="Approved"){
 		
-			var aeSetting = new GlideRecord('x_aleen_alertenter_alertenterprise_settings');		
+			var aeSetting = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_settings');		
 			var onboardRequestCategory =""; 
+			var alertEnterpriseURL= "";
+			var alertEnterpriseUserName="";
+			var alertEnterprisePassword="";
+			var encryptedPassword="";
+			var defaultEndDate="";
 			
 			aeSetting.query();
 			while(aeSetting.next()){
 				onboardRequestCategory=aeSetting.onboarding_identity_action;
+				alertEnterpriseURL=aeSetting.alertenterprise_server_url;
+				alertEnterpriseUserName=aeSetting.user_name;
+				alertEnterprisePassword=aeSetting.password.getDecryptedValue();
+				defaultEndDate=aeSetting.default_end_date;
 				break;
 			}
 			var userInfoSysId = current.sys_id;
@@ -55,33 +62,81 @@
 			var homePhone = current.subject_person.home_phone;
 			var location = current.subject_person.location.name;
 	
-			var empStartDate=current.subject_person_hr_profile.employment_start_date;
-			var empEndDate=current.subject_person_hr_profile.employment_end_date;
+			var empStartDateTime=new GlideDateTime(current.subject_person_hr_profile.employment_start_date);
+			var empStartDate = empStartDateTime.getDate().getByFormat("yyyy-MM-dd");
+			var empStartTime = empStartDateTime.getTime().getByFormat("HH:mm:ss.SSS");
+			
+			var empStartDateTimeStr = empStartDate+'T'+empStartTime+'Z';
+			var empEndDateTimeStr ="";
+		
+			var empEndDateTimeFld=current.subject_person_hr_profile.employment_end_date ;
+			if(empEndDateTimeFld!=null && empEndDateTimeFld!=""){
+				var empEndDateTime=new GlideDateTime(empEndDateTimeFld);
+				var empEndDate = empEndDateTime.getDate().getByFormat("yyyy-MM-dd");
+				var empEndTime = empEndDateTime.getTime().getByFormat("HH:mm:ss.SSS");
+			
+				empEndDateTimeStr = empEndDate+'T'+empEndTime+'Z';
+			} else {
+				//var empDefaultEndDateTime=new GlideDate(defaultEndDate);
+				var empDefaultEndDate = "9999-12-30"; //empDefaultEndDateTime.getDate().getByFormat("yyyy-MM-dd");
+				var empDefaultEndTime = "23:59:00.000";			
+				empEndDateTimeStr = empDefaultEndDate+'T'+empDefaultEndTime+'Z';
+			}
 			var employeeNumber=current.subject_person_hr_profile.employee_number;
 			current.alert_status="Provisioning InProgress";
-			var requestBody = {"userName": userName, "firstName": firstName,
-							  "lastName": lastName, "gender": gender,
-							  "managerName": managerName, "title": title,
-							  "department": department, "email": email,
-							  "businessPhone": businessPhone, "mobilePhone": mobilePhone,
-							  "homePhone": homePhone, "location": location,
-							  "validFrom": empStartDate,"validTo": empEndDate,
-							  "empNumber": employeeNumber,"userInfoSysId":userInfoSysId,
-							   "hrProfileSysId":hrProfileSysId,
-							   "requestCategory":onboardRequestCategory};
 		
-			gs.info("Fields are:"+ requestBody);
+			var requestBody1 = '{"userName":"'+ userName+'", "FirstName":"' +firstName+
+				'","LastName":"'+ lastName+'", "Gender":"'+ gender+
+				'","managerName":"'+ managerName+'", "title":"'+ title+
+				'","department":"'+ department+'", "Email":"'+ email+
+				'","businessPhone":"'+ businessPhone+'", "mobilePhone":"'+ mobilePhone+
+				'","homePhone":"'+ homePhone+'", "ServiceNowLocation":"'+ location+
+				'","validFrom":"'+empStartDateTimeStr+'","validToTest":"'+empEndDateTimeStr+'",'+
+							  '"empNumber": "'+employeeNumber+'","userInfoSysId":"'+userInfoSysId+
+				'","hrProfileSysId":"'+hrProfileSysId+'","identityAction":"'+onboardRequestCategory+
+				'","TSCapplicationSubmit":"Yes","AirportTraining":"Yes"}';
+			gs.info(requestBody1);
+		
+			var requestBody =requestBody1.toString();
+			var responseBody;
+			var status;
+			var sm;
+			try{
+				sm = new sn_ws.RESTMessageV2();
+				sm.setEndpoint(alertEnterpriseURL);
+				sm.setHttpMethod("POST");
+				sm.setRequestHeader("Content-Type","application/json");
+				// Might throw exception if message doesn't exist or not visible due to scope.
+				sm.setBasicAuth(alertEnterpriseUserName,alertEnterprisePassword);
+				sm.setRequestBody(requestBody);
+				var response = sm.executeAsync(); //Might throw exception if http connection timed 
+				//out or some issue with sending request itself because of encryption/decryption 
+				//of password.
+				//response.waitForResponse(200);
+				//responseBody = response.haveError() ? response.getErrorMessage() : response.getBody();
+				//status = response.getStatusCode();
+				//gs.info(responseBody);
+
+				
+			} catch(ex) {
+				responseBody = ex.getMessage();
+				status = '500';
+				gs.info("Calling of AlertEnterprise application failed for:"+firstName+":"+lastName);
+			} finally {
+				requestBody = sm ? sm.getRequestBody():null;
+			}
+		
+			gs.debug("Fields are:"+ requestBody);
 			//Call AE Webservice
 	}else{
-		var coreHRTaskGR = new GlideRecord('sn_hr_core_task');
+		var coreHRTaskGR = new GlideRecordSecure('sn_hr_core_task');
 		coreHRTaskGR.addQuery('sys_id',current.alert_task.sys_id);
 		coreHRTaskGR.query();
 		while(coreHRTaskGR.next()){
 			
-			if(current.approval_status=="Rejected")
+			if(current.onboard_approval_status=="Rejected")
 				coreHRTaskGR.state=4; //Mark the task as Closed Incomplete
-			else if(current.alert_status=="Provisioned")
-				coreHRTaskGR.state=3; //Mark the task as Closed Complete
+			
 			coreHRTaskGR.update();
 		}
 		
@@ -96,8 +151,8 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e59b1919db502340adac9f5faa9619aa</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>Approval/Provision of Onboarding</sys_name>
+        <sys_mod_count>47</sys_mod_count>
+        <sys_name>Approve/Reject of Onboarding</sys_name>
         <sys_overrides/>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
         <sys_policy/>
@@ -105,7 +160,7 @@
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_script_e59b1919db502340adac9f5faa9619aa</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-01 08:46:41</sys_updated_on>
+        <sys_updated_on>2018-10-11 17:05:55</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

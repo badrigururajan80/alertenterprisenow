@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_embedded_help_content">
+    <sys_embedded_help_content action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>hr</category>
+        <content><![CDATA[    <h1 class="title topictitle1">Add or modify an HR service topic detail</h1>        <div class="body taskbody">        <ol class="ol steps" id="sn_hr_core_topic_detail-setup.dita__steps_f4h_rhj_cz"><li class="li step">                <span class="ph cmd">Complete the form.</span>                <table class="simpletable choicetable choicetableborder" id="sn_hr_core_topic_detail-setup.dita__d17544e84"><thead><tr><th id="d359603e29-option">Option</th><th id="d359603e29-desc">Description</th></tr></thead><tbody><tr class="strow chrow"><td id="d359603e33" class="stentry choption"><strong>Active</strong></td><td class="stentry chdesc">Check to make the topic detail active.</td></tr><tr class="strow chrow"><td id="d359603e42" class="stentry choption"><strong>Name</strong></td><td class="stentry chdesc">Enter a name for the topic detail.</td></tr><tr class="strow chrow"><td id="d359603e51" class="stentry choption"><strong>Topic category</strong></td><td class="stentry chdesc">Select the <span class="ph uicontrol">Topic Category</span> associated with the                            topic detail.</td></tr></tbody></table>            </li><li class="li step">                <span class="ph cmd">From the Form <span class="ph uicontrol">Context Menu</span>, click                        <span class="ph uicontrol">Save</span> to save your work and remain on the                        <span class="ph uicontrol">Topic Detail</span> form, or click                        <span class="ph uicontrol">Submit</span> to save your work and return to the                        <span class="ph uicontrol">Topic Details</span> list.</span>            </li><li class="li step">                <span class="ph cmd">Clicking <span class="ph uicontrol">Save</span> displays the <span class="ph uicontrol">HR                        Services</span> section. You can add or edit HR services associated                    with the topic category and topic detail.</span>            </li></ol>    </div>]]></content>
+        <last_sync>2019-03-22 00:28:13</last_sync>
+        <modifier>normal</modifier>
+        <name>sn_hr_core_topic_detail-normal</name>
+        <page>sn_hr_core_topic_detail</page>
+        <product>1</product>
+        <qualifier/>
+        <role/>
+        <role_order>1000</role_order>
+        <snc_created>true</snc_created>
+        <sys_class_name>sys_embedded_help_content</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2018-09-08 00:20:08</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>034b6b9bdb98e340adac9f5faa96195c</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>sn_hr_core_topic_detail-normal</sys_name>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_embedded_help_content_034b6b9bdb98e340adac9f5faa96195c</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2019-03-22 00:28:13</sys_updated_on>
+        <version>j</version>
+    </sys_embedded_help_content>
+    <sys_translated_text action="delete_multiple" query="documentkey=034b6b9bdb98e340adac9f5faa96195c"/>
+</record_update>
