@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="task" label="AlertEnterprise Activity Approval task" max_length="40" name="x_aleen_alertenter_alertenterprise_activity_approval_task" sizeclass="3" type="collection">
+        <element label="Alert User Info" max_length="32" name="alert_user_info" reference="x_aleen_alertenter_alertenterprise_user_info" type="reference"/>
+        <element choice="3" label="Approval status" max_length="40" name="approval_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Approved" value="Approved"/>
+                <element inactive_on_update="false" label="Pending Approval" value="Pending Approval"/>
+                <element inactive_on_update="false" label="Rejected" value="Rejected"/>
+            </choice>
+        </element>
+        <element choice="3" default="Onboard" label="Approval type" max_length="40" name="approval_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Offboard" value="Offboard"/>
+                <element inactive_on_update="false" label="Onboard" value="Onboard"/>
+            </choice>
+        </element>
+    </element>
+</database>

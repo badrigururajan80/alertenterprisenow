@@ -5,6 +5,7 @@
         <element attributes="import_attribute_name=alert_user_id,edge_encryption_enabled=true" label="Alert user ID" max_length="40" name="alert_user_id" type="string"/>
         <element attributes="import_attribute_name=assign_to_group,edge_encryption_enabled=true" label="Assign to group" max_length="40" name="assign_to_group" type="string"/>
         <element attributes="import_attribute_name=assign_to_user,edge_encryption_enabled=true" label="Assign to user" max_length="40" name="assign_to_user" type="string"/>
+        <element label="Badge Id" max_length="40" name="badge_id" type="string"/>
         <element attributes="import_attribute_name=number,edge_encryption_enabled=true" label="Number" max_length="40" name="number" type="string"/>
         <element attributes="import_attribute_name=offboarding_date,edge_encryption_enabled=true" label="Offboarding date" max_length="40" name="offboarding_date" type="string"/>
         <element attributes="import_attribute_name=offboarding_request_number,edge_encryption_enabled=true" label="Offboarding request number" max_length="40" name="offboarding_request_number" type="string"/>

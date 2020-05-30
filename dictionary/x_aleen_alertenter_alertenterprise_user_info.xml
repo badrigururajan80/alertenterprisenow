@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="AlertEnterprise User Info" max_length="40" name="x_aleen_alertenter_alertenterprise_user_info" type="collection">
-        <element choice="1" default="Not Provisioned" label="Alert status" max_length="40" name="alert_status" read_only="true" type="choice">
+        <element choice="1" default="Not Provisioned" label="Alert status" max_length="40" name="alert_status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Not Provisioned" value="Not Provisioned"/>
                 <element inactive_on_update="false" label="Pending Termination" value="Pending Termination"/>
@@ -17,6 +17,7 @@
         <element label="Alert user id" max_length="40" name="alert_user_id" read_only="true" type="string"/>
         <element label="Assign to group" max_length="32" name="assign_to_group" read_only="true" reference="sys_user_group" type="reference"/>
         <element label="Assign to user" max_length="32" name="assign_to_user" read_only="true" reference="sys_user" type="reference"/>
+        <element label="BadgeId" max_length="40" name="badgeid" read_only="true" type="string"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="AlertEnterprise id" max_length="40" name="number" read_only="true" type="string"/>
         <element label="Offboarding date" max_length="40" name="offboarding_date" read_only="true" type="glide_date_time"/>
         <element label="Offboarding request number" max_length="40" name="offboarding_request_number" read_only="true" type="string"/>
@@ -29,7 +30,7 @@
             </choice>
         </element>
         <element label="Onboarding request number" max_length="40" name="onboarding_request_number" read_only="true" type="string"/>
-        <element choice="1" default="Not Required" label="Onboard approval status" max_length="40" name="onboard_approval_status" read_only="true" type="choice">
+        <element choice="1" default="Not Required" label="Onboard approval status" max_length="40" name="onboard_approval_status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Approved" value="Approved"/>
                 <element inactive_on_update="false" label="Not Required" value="Not Required"/>
