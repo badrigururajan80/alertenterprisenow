@@ -31,7 +31,7 @@
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 	var currentActivity=current.short_description;
-	gs.debug("Current Activity:"+currentActivity);
+	gs.info("On Creation Of Activity:Current Activity:"+currentActivity+" number:"+current.number);
 	var aeSetting = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_settings');
 	var enableWorkflow = "No";
 	var onboardActivityName="";
@@ -51,7 +51,7 @@
 		offboardActivityName = aeSetting.offboarding_activity_name;
 		if(current.short_description!=onboardActivityName &&
 		   current.short_description!=offboardActivityName){
-			
+			gs.debug("On Creation Of Activity:Returning as doesnt match with onboard or offboard activity");
 			return;
 		}
 		alertEnterpriseURL=aeSetting.alertenterprise_server_url;
@@ -59,7 +59,6 @@
 		alertEnterprisePassword=aeSetting.password.getDecryptedValue();
 		defaultEndDate=aeSetting.default_end_date;
 		
-		gs.debug("Activity Name:"+current.short_description);
 		onboardRequestCategory=aeSetting.onboarding_identity_action;
 		offboardRequestCategory=aeSetting.offboarding_identity_action;		
 		enableWorkflow = aeSetting.enable_workflow;
@@ -78,18 +77,22 @@
 		break;
 	}
 	
-	var hrProfileSysId = current.parent.subject_person_hr_profile.sys_id;
-	
 	var taskSysId=current.sys_id;
 	var aeUserInfo = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_user_info');
 	var userInfoSysId;
 	if(current.short_description==onboardActivityName){
-		
+		gs.debug("On Creation Of Activity:Onboard Activity");
 		aeUserInfo.initialize();
 		aeUserInfo.subject_person = current.parent.subject_person;
-		aeUserInfo.subject_person_hr_profile=current.parent.subject_person_hr_profile;
 		aeUserInfo.alert_task=taskSysId;
+		var startDate = current.parent.subject_person_hr_profile.employment_start_date;
+		var endDate = current.parent.subject_person_hr_profile.employment_end_date;
+		var employeeNumber=current.parent.subject_person_hr_profile.employee_number;
+		aeUserInfo.start_date = startDate;
+		aeUserInfo.end_date = endDate;
+		aeUserInfo.emp_number = employeeNumber;
 		if(enableWorkflow=="Yes" || enableWorkflow=="onboarding"){
+			gs.debug("On Creation Of Activity:Onboarding Workflow Enabled");
 			aeUserInfo.onboard_approval_status="Pending Approval";
 			aeUserInfo.alert_status="Not Provisioned";
 			if(assignToUser!="")
@@ -101,9 +104,9 @@
 			var aeApprovalTask = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_activity_approval_task');
 			aeApprovalTask.alert_user_info = userInfoSysId;
 			if(assignToUser!="")
-				aeApprovalTask.assign_to_user=assignToUser;
+				aeApprovalTask.assigned_to=assignToUser;
 			if(assignToGroup!="")
-				aeApprovalTask.assign_to_group=assignToGroup;
+				aeApprovalTask.assignment_group=assignToGroup;
 			aeApprovalTask.approval_type="Onboard";
 			aeApprovalTask.approval_status="Pending Approval";
 			aeApprovalTask.short_description=current.short_description;
@@ -111,6 +114,7 @@
 			aeApprovalTask.insert();
 			
 		} else {
+			gs.debug("On Creation Of Activity:Onboard Approval Not Required");
 			aeUserInfo.onboard_approval_status="Not Required";
 			aeUserInfo.alert_status="Provisioning InProgress";
 			userInfoSysId = aeUserInfo.insert();
@@ -118,6 +122,7 @@
 			var userName = current.parent.subject_person.user_name;
 			var firstName = current.parent.subject_person.first_name;
 			var lastName = current.parent.subject_person.last_name;
+			var middleName = current.parent.subject_person.middle_name;
 			var gender = current.parent.subject_person.gender;
 			var managerName = current.parent.subject_person.manager.user_name;
 			var title = current.parent.subject_person.title;
@@ -129,14 +134,14 @@
 			var location = current.parent.subject_person.location.name;
 	
 			
-			var empStartDateTime=new GlideDateTime(current.parent.subject_person_hr_profile.employment_start_date);
+			var empStartDateTime=new GlideDateTime(startDate);
 			var empStartDate = empStartDateTime.getDate().getByFormat("yyyy-MM-dd");
 			var empStartTime = empStartDateTime.getTime().getByFormat("HH:mm:ss.SSS");
 			
 			var empStartDateTimeStr = empStartDate+'T'+empStartTime+'Z';
 			var empEndDateTimeStr ="";
 		
-			var empEndDateTimeFld=current.parent.subject_person_hr_profile.employment_end_date;
+			var empEndDateTimeFld=endDate;
 			if(empEndDateTimeFld!=null && empEndDateTimeFld!=""){
 				var empEndDateTime=new GlideDateTime(empEndDateTimeFld);
 				var empEndDate = empEndDateTime.getDate().getByFormat("yyyy-MM-dd");
@@ -149,24 +154,24 @@
 				var empDefaultEndTime = "23:59:00.000";			
 				empEndDateTimeStr = empDefaultEndDate+'T'+empDefaultEndTime+'Z';
 			}
-			var employeeNumber=current.parent.subject_person_hr_profile.employee_number;
 			
 			
-			var requestBody1 = '{"userName":"'+ userName+'", "FirstName":"' +firstName+
+			
+			var requestBody1 = '{"userName":"'+ userName+'", "FirstName":"' +firstName+'","MiddleName":"'+ middleName+
 				'","LastName":"'+ lastName+'", "Gender":"'+ gender+
-				'","managerName":"'+ managerName+'", "title":"'+ title+
-				'","department":"'+ department+'", "Email":"'+ email+
+				'","ManagerName":"'+ managerName+'", "Title":"'+ title+
+				'","Department":"'+ department+'", "Email":"'+ email+
 				'","businessPhone":"'+ businessPhone+'", "mobilePhone":"'+ mobilePhone+
 				'","homePhone":"'+ homePhone+'", "ServiceNowLocation":"'+ location+
-				'","validFrom":"'+empStartDateTimeStr+'","validTo":"'+empEndDateTimeStr+'",'+
-							  '"empNumber": "'+employeeNumber+'","userInfoSysId":"'+userInfoSysId+
-				'","hrProfileSysId":"'+hrProfileSysId+'","identityAction":"'+onboardRequestCategory+
+				'","ValidFrom":"'+empStartDateTimeStr+'","ValidTo":"'+empEndDateTimeStr+'",'+
+							  '"empNumber": "'+employeeNumber+'","userInfoSysId":"'+userInfoSysId+'","identityAction":"'+onboardRequestCategory+
 				'","TSCapplicationSubmit":"Yes","AirportTraining":"Yes"}';
 			var requestBody =requestBody1.toString();
 			var responseBody;
 			var status;
 			var sm;
 			try{
+				gs.info("On Creation Of Activity:Before execution of Onboard Rest API:"+current.number);
 				sm = new sn_ws.RESTMessageV2();
 				sm.setEndpoint(alertEnterpriseURL);
 				sm.setHttpMethod("POST");
@@ -177,12 +182,12 @@
 				sm.executeAsync(); //Might throw exception if http connection timed 
 				//out or some issue with sending request itself because of encryption/decryption 
 				//of password.
-
+				gs.info("On Creation Of Activity:Async execution of Onboard Rest API");
 				
 			} catch(ex) {
 				responseBody = ex.getMessage();
 				status = '500';
-				gs.info("Calling of AlertEnterprise application gailed for:"+firstName+":"+lastName);
+				gs.info("Calling of AlertEnterprise application failed for:"+firstName+":"+lastName);
 			} finally {
 				requestBody = sm ? sm.getRequestBody():null;
 			}
@@ -194,23 +199,46 @@
 			
 		}
 	} else if(current.short_description==offboardActivityName){
-		gs.debug("Offboard Task Activity:"+offboardActivityName);
-		var userSysId = current.parent.subject_person.sys_id;
-		gs.debug("Offboard Task Activity:"+userSysId);
+		gs.debug("On Creation Of Activity:Offboard Activity:"+offboardActivityName);
+		
+		var userSysId = current.parent.subject_person;
 		aeUserInfo.addQuery('subject_person',userSysId);
+		aeUserInfo.addQuery('alert_status','Provisioned');
 		aeUserInfo.query();
+		var found = false;
 		while(aeUserInfo.next()){
-			gs.debug("Offboard Task Activity:Record Found");
+			found = true;
+			gs.debug("On Creation Of Activity:Offboard Task Activity:Record Found");
 			aeUserInfo.alert_task=taskSysId;
+			gs.debug("Enable Workflow"+enableWorkflow);
 			if(enableWorkflow=="Yes" || enableWorkflow=="offboarding"){
+				gs.debug("On Creation Of Activity:Offboard workflow enabled");
 				aeUserInfo.offboard_approval_status="Pending Approval";
 				aeUserInfo.alert_status="Pending Termination";
+				var aeApprovalOffBoardTask = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_activity_approval_task');
+				gs.debug("Offboard after glide record");
+			aeApprovalOffBoardTask.alert_user_info = aeUserInfo.sys_id;
+				gs.debug("Offboard after alert user info");
+			if(assignToUser!="")
+				aeApprovalOffBoardTask.assigned_to=assignToUser;
+			if(assignToGroup!="")
+				aeApprovalOffBoardTask.assignment_group=assignToGroup;
+			gs.debug("After assign");
+			aeApprovalOffBoardTask.approval_type="Offboard";
+			aeApprovalOffBoardTask.approval_status="Pending Approval";
+			aeApprovalOffBoardTask.short_description=current.short_description;
+			aeApprovalOffBoardTask.description="This task is created as part of Offboarding Request. Upon approval user's badge will be removed and all physical access will be removed";
+				
+			aeApprovalOffBoardTask.insert();
+				gs.debug("On Creation Of Activity:After Insert");
 				if(assignToUser!="")
 					aeUserInfo.assign_to_user=assignToUser;
 				if(assignToGroup!="")
 					aeUserInfo.assign_to_group=assignToGroup;
 				aeUserInfo.update();
+				gs.debug("On Creation Of Activity:After Update");
 			} else {
+				gs.debug("On Creation Of Activity:Offboard workflow not enabled");
 				aeUserInfo.offboard_approval_status="Not Required";
 				aeUserInfo.alert_status="Termination InProgress";
 				aeUserInfo.update();
@@ -219,6 +247,7 @@
 				
 				var smt;
 				try{
+					gs.debug("On Creation Of Activity:Before calling Offboard rest API");
 					smt = new sn_ws.RESTMessageV2();
 					smt.setEndpoint(alertEnterpriseURL);
 					smt.setHttpMethod("POST");
@@ -229,7 +258,7 @@
 					smt.executeAsync(); //Might throw exception if http connection timed 
 					//out or some issue with sending request itself because of encryption/decryption 
 					//of password.
-
+					gs.info("On Creation Of Activity:Async execution of Offboard Rest API");
 
 				} catch(ex) {
 					responseBody = ex.getMessage();
@@ -246,6 +275,7 @@
 		} 
 		
 		
+		
 	}
 
 })(current, previous);]]></script>
@@ -256,7 +286,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e6b99dd5db502340adac9f5faa961917</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>51</sys_mod_count>
         <sys_name>On Creation of AlertEnterprise Activity</sys_name>
         <sys_overrides/>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
@@ -265,7 +295,7 @@
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_script_e6b99dd5db502340adac9f5faa961917</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-05-29 21:35:32</sys_updated_on>
+        <sys_updated_on>2020-06-07 07:39:25</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

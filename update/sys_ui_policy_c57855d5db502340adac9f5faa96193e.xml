@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_policy">
     <sys_ui_policy action="INSERT_OR_UPDATE">
         <active>true</active>
-        <conditions table="x_aleen_alertenter_alertenterprise_settings">offboarding_option=call alertenterprise activity^EQ<item endquery="false" field="offboarding_option" goto="false" newquery="false" operator="=" or="false" value="call alertenterprise activity"/>
+        <conditions table="x_aleen_alertenter_alertenterprise_settings">offboarding_option=call alertenterprise activity^EQ<item display_value="call alertenterprise activity" endquery="false" field="offboarding_option" goto="false" newquery="false" operator="=" or="false" value="call alertenterprise activity"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </conditions>
         <description/>

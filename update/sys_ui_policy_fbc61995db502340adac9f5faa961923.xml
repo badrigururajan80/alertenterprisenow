@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_policy">
     <sys_ui_policy action="INSERT_OR_UPDATE">
         <active>true</active>
-        <conditions table="x_aleen_alertenter_alertenterprise_settings">enable_workflow!=No^assign_to=group^EQ<item endquery="false" field="enable_workflow" goto="false" newquery="false" operator="!=" or="false" value="No"/>
-            <item endquery="false" field="assign_to" goto="false" newquery="false" operator="=" or="false" value="group"/>
+        <conditions table="x_aleen_alertenter_alertenterprise_settings">enable_workflow!=No^assign_to=group^EQ<item display_value="No" endquery="false" field="enable_workflow" goto="false" newquery="false" operator="!=" or="false" value="No"/>
+            <item display_value="Group" endquery="false" field="assign_to" goto="false" newquery="false" operator="=" or="false" value="group"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </conditions>
         <description/>

@@ -19,7 +19,7 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2020-05-29 21:17:43</sys_updated_on>
         <table>x_aleen_alertenter_alertenterprise_user_info</table>
-        <ui_policy display_value="Make AlertEnterprise  User Status Read Only">b0dad74adbc95810a3b6176a489619e9</ui_policy>
+        <ui_policy display_value="Make AlertEnterprise  User Info Fields Read Only">b0dad74adbc95810a3b6176a489619e9</ui_policy>
         <visible>ignore</visible>
     </sys_ui_policy_action>
 </record_update>

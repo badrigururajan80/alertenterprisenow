@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>true</active>
+        <client>false</client>
+        <client_script_v2/>
+        <comments/>
+        <condition>gs.hasRole('x_aleen_alertenter.prov_retry_role') &amp;&amp;!current.isNewRecord()&amp;&amp;current.alert_status=="Provisioning InProgress"&amp;&amp;(current.onboarding_request_number == '' || current.onboarding_request_number == "undefined")</condition>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint/>
+        <isolate_script>false</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <name>Retry Provisioning</name>
+        <onclick/>
+        <order>100</order>
+        <script><![CDATA[gs.debug("Retry Of Onboarding: Start");
+		
+var aeSetting = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_settings');		
+var onboardRequestCategory =""; 
+var alertEnterpriseURL= "";
+var alertEnterpriseUserName="";
+var alertEnterprisePassword="";
+var encryptedPassword="";
+var defaultEndDate="";
+			
+aeSetting.query();
+while(aeSetting.next()){
+			onboardRequestCategory=aeSetting.onboarding_identity_action;
+			alertEnterpriseURL=aeSetting.alertenterprise_server_url;
+			alertEnterpriseUserName=aeSetting.user_name;
+			alertEnterprisePassword=aeSetting.password.getDecryptedValue();
+			break;
+}
+
+var userInfoSysId = current.sys_id;
+var userName = current.subject_person.user_name;
+var firstName = current.subject_person.first_name;
+var lastName = current.subject_person.last_name;
+var middleName = current.subject_person.middle_name;
+var gender = current.subject_person.gender;
+var managerName = current.subject_person.manager.user_name;
+var title = current.subject_person.title;
+var department = current.subject_person.department.name;
+var email = current.subject_person.email;
+var businessPhone = current.subject_person.phone;
+var mobilePhone = current.subject_person.mobile_phone;
+var homePhone = current.subject_person.home_phone;
+var location = current.subject_person.location.name;
+			
+gs.debug("Retry Of Onboarding: for:"+firstName+":"+lastName);
+	
+var empStartDateTime=new GlideDateTime(current.start_date);
+var empStartDate = empStartDateTime.getDate().getByFormat("yyyy-MM-dd");
+var empStartTime = empStartDateTime.getTime().getByFormat("HH:mm:ss.SSS");
+			
+var empStartDateTimeStr = empStartDate+'T'+empStartTime+'Z';
+var empEndDateTimeStr ="";
+		
+var empEndDateTimeFld=current.end_date;
+if(empEndDateTimeFld!=null && empEndDateTimeFld!=""){
+				var empEndDateTime=new GlideDateTime(empEndDateTimeFld);
+				var empEndDate = empEndDateTime.getDate().getByFormat("yyyy-MM-dd");
+				var empEndTime = empEndDateTime.getTime().getByFormat("HH:mm:ss.SSS");
+			
+				empEndDateTimeStr = empEndDate+'T'+empEndTime+'Z';
+} else {
+				//var empDefaultEndDateTime=new GlideDate(defaultEndDate);
+				var empDefaultEndDate = "9999-12-30"; //empDefaultEndDateTime.getDate().getByFormat("yyyy-MM-dd");
+				var empDefaultEndTime = "23:59:00.000";			
+				empEndDateTimeStr = empDefaultEndDate+'T'+empDefaultEndTime+'Z';
+}
+var employeeNumber=current.emp_number;
+var requestBody1 = '{"userName":"'+ userName+'", "FirstName":"' +firstName+'","MiddleName":"'+ middleName+
+				'","LastName":"'+ lastName+'", "Gender":"'+ gender+
+				'","ManagerName":"'+ managerName+'", "Title":"'+ title+
+				'","Department":"'+ department+'", "Email":"'+ email+
+				'","businessPhone":"'+ businessPhone+'", "mobilePhone":"'+ mobilePhone+
+				'","homePhone":"'+ homePhone+'", "ServiceNowLocation":"'+ location+
+				'","ValidFrom":"'+empStartDateTimeStr+'","ValidTo":"'+empEndDateTimeStr+'",'+
+				'"empNumber": "'+employeeNumber+'","userInfoSysId":"'+userInfoSysId+
+				'","identityAction":"'+onboardRequestCategory+
+				'","TSCapplicationSubmit":"Yes","AirportTraining":"Yes"}';
+var requestBody =requestBody1.toString();
+var responseBody;
+			var status;
+			var sm;
+			try{
+				gs.debug("Retry Of Onboarding: Before calling rest api");
+				sm = new sn_ws.RESTMessageV2();
+				sm.setEndpoint(alertEnterpriseURL);
+				sm.setHttpMethod("POST");
+				sm.setRequestHeader("Content-Type","application/json");
+				// Might throw exception if message doesn't exist or not visible due to scope.
+				sm.setBasicAuth(alertEnterpriseUserName,alertEnterprisePassword);
+				sm.setRequestBody(requestBody);
+				var response = sm.executeAsync(); //Might throw exception if http connection timed 
+				//out or some issue with sending request itself because of encryption/decryption 
+				//of password.
+				//response.waitForResponse(200);
+				//responseBody = response.haveError() ? response.getErrorMessage() : response.getBody();
+				//status = response.getStatusCode();
+				//gs.info(responseBody);
+				gs.info("Retry Of Onboarding: Async execution of rest API for:"+firstName+":"+lastName);
+				//Call AE Webservice
+				current.state=3;
+				
+			} catch(ex) {
+				responseBody = ex.getMessage();
+				status = '500';
+				gs.info("Retry Of Onboarding: Calling of AlertEnterprise application failed for:"+firstName+":"+lastName);
+				current.state=4;
+			} finally {
+				requestBody = sm ? sm.getRequestBody():null;
+			}
+		
+			gs.debug("Retry of onboarding Fields are:"+ requestBody);]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-05 00:27:48</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>afdeb244db51dc10a3b6176a4896197f</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Retry Provisioning</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_ui_action_afdeb244db51dc10a3b6176a4896197f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-05 03:33:04</sys_updated_on>
+        <table>x_aleen_alertenter_alertenterprise_user_info</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

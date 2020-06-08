@@ -11,14 +11,16 @@
         <advanced>true</advanced>
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
-        <collection>x_aleen_alertenter_alertenterprise_user_info</collection>
-        <condition>(previous.offboard_approval_status!="Approved" &amp;&amp; current.offboard_approval_status=="Approved") || (previous.offboard_approval_status!="Rejected" &amp;&amp; current.offboard_approval_status=="Rejected")</condition>
+        <collection>x_aleen_alertenter_alertenterprise_activity_approval_task</collection>
+        <condition>(previous.approval_status!="Approved" &amp;&amp; current.approval_status=="Approved") || (previous.approval_status!="Rejected" &amp;&amp; current.approval_status=="Rejected")</condition>
         <description/>
         <execute_function>false</execute_function>
-        <filter_condition/>
+        <filter_condition table="x_aleen_alertenter_alertenterprise_activity_approval_task">approval_type=Offboard^EQ<item display_value="Offboard" endquery="false" field="approval_type" goto="false" newquery="false" operator="=" or="false" value="Offboard"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
         <is_rest>false</is_rest>
         <message/>
-        <name>Approval of Offboarding</name>
+        <name>Approval/Rejection of Offboarding</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -29,8 +31,9 @@
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 
-	if(current.offboard_approval_status=="Approved" &&
-		   previous.offboard_approval_status!="Approved"){
+	if(current.approval_status=="Approved" &&
+		   previous.approval_status!="Approved"){
+				gs.debug("Approval Of Offboarding: Start");
 				var aeSetting = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_settings');		
 				var offboardRequestCategory =""; 
 				var alertEnterpriseURL= "";
@@ -45,46 +48,56 @@
 					alertEnterprisePassword=aeSetting.password.getDecryptedValue();
 					break;
 				}
-		
-				current.alert_status="Termination InProgress";
-				var termRequestBody = '{"UserId":"'+current.alert_user_id+'",'+
+				
+				 var alertUserInfo = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_user_info');
+				 alertUserInfo.addQuery("sys_id",current.alert_user_info);
+			     alertUserInfo.query();
+			     while(alertUserInfo.next()){
+					alertUserInfo.alert_status="Termination InProgress";
+					var termRequestBody = '{"UserId":"'+alertUserInfo.alert_user_id+'",'+
 					'"identityAction":"'+offboardRequestCategory+'"}';
 				
-				var responseBody;
-				var smt;
-				try{
-					smt = new sn_ws.RESTMessageV2();
-					smt.setEndpoint(alertEnterpriseURL);
-					smt.setHttpMethod("POST");
-					smt.setRequestHeader("Content-Type","application/json");
-					// Might throw exception if message doesn't exist or not visible due to scope.
-					smt.setBasicAuth(alertEnterpriseUserName,alertEnterprisePassword);
-					smt.setRequestBody(termRequestBody);
-					smt.executeAsync(); //Might throw exception if http connection timed 
-					//out or some issue with sending request itself because of encryption/decryption 
-					//of password.
+					var responseBody;
+					var smt;
+					try{
+						gs.debug("Approval Of Offboarding: Calling rest API");
+						smt = new sn_ws.RESTMessageV2();
+						smt.setEndpoint(alertEnterpriseURL);
+						smt.setHttpMethod("POST");
+						smt.setRequestHeader("Content-Type","application/json");
+						// Might throw exception if message doesn't exist or not visible due to scope.
+						smt.setBasicAuth(alertEnterpriseUserName,alertEnterprisePassword);
+						smt.setRequestBody(termRequestBody);
+						smt.executeAsync(); //Might throw exception if http connection timed 
+						//out or some issue with sending request itself because of encryption/decryption 
+						//of password.
+						gs.info("Approval Of Offboarding: Async Calling rest API success for:"+aeUserInfo.alert_user_id);
 
-
-				} catch(ex) {
-					responseBody = ex.getMessage();
+					} catch(ex) {
+						responseBody = ex.getMessage();
 					
-					gs.info("Calling of AlertEnterprise application failed for termination of :"
+						gs.info("Calling of AlertEnterprise application failed for termination of :"
 							+aeUserInfo.alert_user_id+":"+responseBody);
-				} finally {
-					termRequestBody = smt ? smt.getRequestBody():null;
-				}
+					} finally {
+						termRequestBody = smt ? smt.getRequestBody():null;
+					}
+				 }
+		
+				
+				
 		
 		
 	}else{
-		
+		gs.debug("Rejection Of Offboarding");
 		var coreHRTaskGR = new GlideRecordSecure('sn_hr_core_task');
-		coreHRTaskGR.addQuery('sys_id',current.alert_task.sys_id);
+		coreHRTaskGR.addQuery('sys_id',current.alert_user_info.alert_task);
 		coreHRTaskGR.query();
 		while(coreHRTaskGR.next()){
-			
+			gs.debug("Rejection Of Offboarding:Updating status");
 			if(current.approval_status=="Rejected")
 				coreHRTaskGR.state=4; //Mark the task as Closed Incomplete
 			coreHRTaskGR.update();
+			gs.debug("Rejection Of Offboarding: status update success");
 		}
 	}
 
@@ -96,8 +109,8 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>194c9519db502340adac9f5faa9619a1</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>Approval of Offboarding</sys_name>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Approval/Rejection of Offboarding</sys_name>
         <sys_overrides/>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
         <sys_policy/>
@@ -105,9 +118,9 @@
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_script_194c9519db502340adac9f5faa9619a1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-26 00:14:03</sys_updated_on>
+        <sys_updated_on>2020-06-02 18:47:39</sys_updated_on>
         <template/>
-        <when>before</when>
+        <when>after</when>
     </sys_script>
     <sys_translated_text action="delete_multiple" query="documentkey=194c9519db502340adac9f5faa9619a1"/>
 </record_update>

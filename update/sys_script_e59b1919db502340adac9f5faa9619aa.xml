@@ -15,7 +15,7 @@
         <condition>(previous.approval_status!="Approved" &amp;&amp; current.approval_status=="Approved") || (previous.approval_status!="Rejected" &amp;&amp; current.approval_status=="Rejected")</condition>
         <description/>
         <execute_function>false</execute_function>
-        <filter_condition table="x_aleen_alertenter_alertenterprise_activity_approval_task">approval_type=Onboard^EQ<item endquery="false" field="approval_type" goto="false" newquery="false" operator="=" or="false" value="Onboard"/>
+        <filter_condition table="x_aleen_alertenter_alertenterprise_activity_approval_task">approval_type=Onboard^EQ<item display_value="Onboard" endquery="false" field="approval_type" goto="false" newquery="false" operator="=" or="false" value="Onboard"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </filter_condition>
         <is_rest>false</is_rest>
@@ -31,6 +31,7 @@
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 	if(current.approval_status=="Approved" && previous.approval_status!="Approved"){
+			gs.debug("Approval Of Onboarding: Start");
 		
 			var aeSetting = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_settings');		
 			var onboardRequestCategory =""; 
@@ -54,8 +55,8 @@
 		    alertUserInfo.addQuery("sys_id",current.alert_user_info);
 			alertUserInfo.query();
 			while(alertUserInfo.next()){
+			gs.debug("Approval Of Onboarding: User Found");
 			var userInfoSysId = alertUserInfo.sys_id;
-			var hrProfileSysId= alertUserInfo.subject_person_hr_profile.sys_id;
 			var userName = alertUserInfo.subject_person.user_name;
 			var firstName = alertUserInfo.subject_person.first_name;
 			var lastName = alertUserInfo.subject_person.last_name;
@@ -69,15 +70,17 @@
 			var mobilePhone = alertUserInfo.subject_person.mobile_phone;
 			var homePhone = alertUserInfo.subject_person.home_phone;
 			var location = alertUserInfo.subject_person.location.name;
+			
+			gs.info("Approval Of Onboarding: for:"+firstName+":"+lastName);
 	
-			var empStartDateTime=new GlideDateTime(alertUserInfo.subject_person_hr_profile.employment_start_date);
+			var empStartDateTime=new GlideDateTime(alertUserInfo.start_date);
 			var empStartDate = empStartDateTime.getDate().getByFormat("yyyy-MM-dd");
 			var empStartTime = empStartDateTime.getTime().getByFormat("HH:mm:ss.SSS");
 			
 			var empStartDateTimeStr = empStartDate+'T'+empStartTime+'Z';
 			var empEndDateTimeStr ="";
 		
-			var empEndDateTimeFld=alertUserInfo.subject_person_hr_profile.employment_end_date ;
+			var empEndDateTimeFld=alertUserInfo.end_date;
 			if(empEndDateTimeFld!=null && empEndDateTimeFld!=""){
 				var empEndDateTime=new GlideDateTime(empEndDateTimeFld);
 				var empEndDate = empEndDateTime.getDate().getByFormat("yyyy-MM-dd");
@@ -90,10 +93,11 @@
 				var empDefaultEndTime = "23:59:00.000";			
 				empEndDateTimeStr = empDefaultEndDate+'T'+empDefaultEndTime+'Z';
 			}
-			var employeeNumber=alertUserInfo.subject_person_hr_profile.employee_number;
+			var employeeNumber=alertUserInfo.emp_number;
 			alertUserInfo.alert_status="Provisioning InProgress";
 			alertUserInfo.onboard_approval_status="Approved";
 			alertUserInfo.update();
+			gs.debug("Approval Of Onboarding: Updated Alert User Info");
 		
 			var requestBody1 = '{"userName":"'+ userName+'", "FirstName":"' +firstName+'","MiddleName":"'+ middleName+
 				'","LastName":"'+ lastName+'", "Gender":"'+ gender+
@@ -102,8 +106,8 @@
 				'","businessPhone":"'+ businessPhone+'", "mobilePhone":"'+ mobilePhone+
 				'","homePhone":"'+ homePhone+'", "ServiceNowLocation":"'+ location+
 				'","ValidFrom":"'+empStartDateTimeStr+'","ValidTo":"'+empEndDateTimeStr+'",'+
-							  '"empNumber": "'+employeeNumber+'","userInfoSysId":"'+userInfoSysId+
-				'","hrProfileSysId":"'+hrProfileSysId+'","identityAction":"'+onboardRequestCategory+
+				'"empNumber": "'+employeeNumber+'","userInfoSysId":"'+userInfoSysId+
+				'","identityAction":"'+onboardRequestCategory+
 				'","TSCapplicationSubmit":"Yes","AirportTraining":"Yes"}';
 			gs.info(requestBody1);
 		
@@ -112,6 +116,7 @@
 			var status;
 			var sm;
 			try{
+				gs.info("Approval Of Onboarding: Before calling rest api:"+firstName+":"+lastName);
 				sm = new sn_ws.RESTMessageV2();
 				sm.setEndpoint(alertEnterpriseURL);
 				sm.setHttpMethod("POST");
@@ -126,31 +131,51 @@
 				//responseBody = response.haveError() ? response.getErrorMessage() : response.getBody();
 				//status = response.getStatusCode();
 				//gs.info(responseBody);
-
+				gs.info("Approval Of Onboarding: Async execution of rest API for:"+firstName+":"+lastName);
+				//Call AE Webservice
+				current.state=3;
 				
 			} catch(ex) {
 				responseBody = ex.getMessage();
 				status = '500';
-				gs.info("Calling of AlertEnterprise application failed for:"+firstName+":"+lastName);
+				gs.info("Approval Of Onboarding: Calling of AlertEnterprise application failed for:"+firstName+":"+lastName);
+				current.state=4;
 			} finally {
 				requestBody = sm ? sm.getRequestBody():null;
 			}
 		
 			gs.debug("Fields are:"+ requestBody);
-			//Call AE Webservice
-			current.state=3;
+			
 		}
 			
 	}else{
+		gs.info("Rejection Of Onboarding");
+		current.state=3;
+		gs.debug('Before getting task');
 		var coreHRTaskGR = new GlideRecordSecure('sn_hr_core_task');
-		coreHRTaskGR.addQuery('sys_id',current.alert_task.sys_id);
+		coreHRTaskGR.addQuery('sys_id',current.alert_user_info.alert_task);
 		coreHRTaskGR.query();
+		gs.debug('After getting task');
 		while(coreHRTaskGR.next()){
 			
-			if(current.onboard_approval_status=="Rejected")
+			gs.debug("Rejection Of Onboarding:Updating task status");
+			if(current.approval_status=="Rejected"){
+				gs.debug("Rejection Of Onboarding:Confirming rejected status");
 				coreHRTaskGR.state=4; //Mark the task as Closed Incomplete
+				coreHRTaskGR.update();
+				gs.info("Rejection Of Onboarding:Status updated:"+coreHRTaskGR.number);
+			}
+				
 			
-			coreHRTaskGR.update();
+			
+		}
+		
+		var alertUserInfoRej = new GlideRecordSecure('x_aleen_alertenter_alertenterprise_user_info');
+		alertUserInfoRej.addQuery("sys_id",current.alert_user_info);
+		alertUserInfoRej.query();
+		while(alertUserInfoRej.next()){
+			alertUserInfoRej.onboard_approval_status="Rejected";
+			alertUserInfoRej.update();
 		}
 		
 	}
@@ -164,7 +189,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e59b1919db502340adac9f5faa9619aa</sys_id>
-        <sys_mod_count>61</sys_mod_count>
+        <sys_mod_count>80</sys_mod_count>
         <sys_name>Approve/Reject of Onboarding</sys_name>
         <sys_overrides/>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
@@ -173,9 +198,9 @@
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_script_e59b1919db502340adac9f5faa9619aa</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-05-29 23:13:46</sys_updated_on>
+        <sys_updated_on>2020-06-07 07:06:56</sys_updated_on>
         <template/>
-        <when>after</when>
+        <when>before</when>
     </sys_script>
     <sys_translated_text action="delete_multiple" query="documentkey=e59b1919db502340adac9f5faa9619aa"/>
 </record_update>

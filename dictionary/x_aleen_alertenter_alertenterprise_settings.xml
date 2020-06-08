@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="AlertEnterprise Settings" max_length="40" name="x_aleen_alertenter_alertenterprise_settings" type="collection">
+    <element label="AlertEnterprise Settings" max_length="40" name="x_aleen_alertenter_alertenterprise_settings" sizeclass="1" type="collection">
         <element label="AlertEnterprise server URL" max_length="255" name="alertenterprise_server_url" type="string"/>
         <element choice="1" label="Assign to" max_length="40" name="assign_to" type="choice">
             <choice>
@@ -11,13 +11,13 @@
         </element>
         <element label="Assign to group" max_length="32" name="assign_to_group" reference="sys_user_group" type="reference"/>
         <element label="Assign to user" max_length="32" name="assign_to_user" reference="sys_user" type="reference"/>
-        <element default="12/29/9999" label="Default end date" max_length="40" name="default_end_date" type="glide_date"/>
+        <element active="false" default="12/29/9999" label="Default end date" max_length="40" name="default_end_date" type="glide_date"/>
         <element choice="1" label="Enable workflow" max_length="40" name="enable_workflow" type="choice">
             <choice>
                 <element inactive_on_update="false" label="No" value="No"/>
-                <element inactive_on_update="false" label="All" sequence="1" value="Yes"/>
+                <element inactive="true" inactive_on_update="true" label="All" sequence="1" value="Yes"/>
                 <element inactive_on_update="false" label="Onboarding" sequence="2" value="onboarding"/>
-                <element inactive_on_update="false" label="Offboarding (For AlertEnterprise Activity)" sequence="3" value="offboarding"/>
+                <element inactive="true" inactive_on_update="true" label="Offboarding (For AlertEnterprise Activity)" sequence="3" value="offboarding"/>
             </choice>
         </element>
         <element label="Incident template name" max_length="100" name="incident_template_name" type="string"/>
@@ -26,8 +26,8 @@
         <element choice="1" label="Offboarding option" max_length="40" name="offboarding_option" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Create Incident" sequence="1" value="create incident"/>
-                <element inactive_on_update="false" label="Call AlertEnterprise Activity" sequence="2" value="call alertenterprise activity"/>
-                <element inactive_on_update="false" label="Set Employment End Date" sequence="3" value="set employment end date"/>
+                <element inactive="true" inactive_on_update="true" label="Call AlertEnterprise Activity" sequence="2" value="call alertenterprise activity"/>
+                <element inactive="true" inactive_on_update="true" label="Set Employment End Date" sequence="3" value="set employment end date"/>
             </choice>
         </element>
         <element label="Onboarding activity name" max_length="100" name="onboarding_activity_name" type="string"/>

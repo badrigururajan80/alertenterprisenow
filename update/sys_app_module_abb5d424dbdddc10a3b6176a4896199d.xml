@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="AlertEnterprise User Info">ed7c05d1db102340adac9f5faa96198a</application>
+        <assessment/>
+        <content_page/>
+        <device_type/>
+        <filter table="x_aleen_alertenter_alertenterprise_user_info">alert_status=Not Provisioned^EQ<item display_value="Not Provisioned" endquery="false" field="alert_status" goto="false" newquery="false" operator="=" or="false" value="Not Provisioned"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Not Provisioned</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_aleen_alertenter_alertenterprise_user_info</name>
+        <order>10</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <roles>x_aleen_alertenter.user_info_notprov</roles>
+        <survey/>
+        <survey_overwrite>true</survey_overwrite>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-06 01:21:27</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>abb5d424dbdddc10a3b6176a4896199d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Not Provisioned</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_app_module_abb5d424dbdddc10a3b6176a4896199d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-06 08:03:29</sys_updated_on>
+        <timeline_page/>
+        <title>Not Provisioned</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

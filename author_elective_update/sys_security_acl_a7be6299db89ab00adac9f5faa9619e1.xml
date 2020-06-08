@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>false</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description/>
+        <name>sn_hr_core_task</name>
+        <operation display_value="write">write</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-08 21:35:12</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>a7be6299db89ab00adac9f5faa9619e1</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>sn_hr_core_task</sys_name>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_security_acl_a7be6299db89ab00adac9f5faa9619e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-03 18:45:55</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</application>
+        <file_path/>
+        <instance_id>e930a3a4db4f5780cbf6d5b0cf9619fd</instance_id>
+        <instance_name>ven02573</instance_name>
+        <name>sys_security_acl_a7be6299db89ab00adac9f5faa9619e1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>false</active><admin_overrides>true</admin_overrides><advanced>false</advanced><condition/><description/><name>sn_hr_core_task</name><operation display_value="write">write</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2018-10-08 21:35:12</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>a7be6299db89ab00adac9f5faa9619e1</sys_id><sys_mod_count>5</sys_mod_count><sys_name>sn_hr_core_task</sys_name><sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope><sys_update_name>sys_security_acl_a7be6299db89ab00adac9f5faa9619e1</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-06-03 18:45:55</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>364359934</payload_hash>
+        <record_name>sn_hr_core_task</record_name>
+        <reverted_from/>
+        <source>9286059ddbdcef00adac9f5faa961929</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-03 18:45:55</sys_created_on>
+        <sys_id>e258a87bdbcd5c10a3b6176a4896199e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1727b8110e90000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-03 18:45:55</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>2e58a87b48cd5c1031a0d4c2b62f229d</update_guid>
+        <update_guid_history>2e58a87b48cd5c1031a0d4c2b62f229d:364359934,66a3aa72ed89d810f745d3f3c46fae26:1817589847,f0ac9eba9249d810cae2b888acebe5e5:364359934,c78a5e3a1449d810ad7a726d250cdb39:1817589847,9ebd3dfe16c5d810c3cff197c9c52a1e:364359934,a1deee59be89ab007c6b2fd2626ea1ff:1817589847</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-03 21:16:36</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>3b906b220baa4c14822a31a4732cd0a4</sys_id>
+        <sys_metadata>a7be6299db89ab00adac9f5faa9619e1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sn_hr_core_task</sys_name>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_parent display_value="sn_hr_core_task">fc4e8555db102340adac9f5faa9619da</sys_parent>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_scope_delete display_value="">7e368cb0f61b4ab299ca21a51c1f9dc4</sys_scope_delete>
+        <sys_update_name>sys_security_acl_a7be6299db89ab00adac9f5faa9619e1</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_a7be6299db89ab00adac9f5faa9619e1">e258a87bdbcd5c10a3b6176a4896199e</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-03 21:16:36</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

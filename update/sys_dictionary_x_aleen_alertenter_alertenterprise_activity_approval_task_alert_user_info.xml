@@ -38,7 +38,7 @@
         <name>x_aleen_alertenter_alertenterprise_activity_approval_task</name>
         <next_element/>
         <primary>false</primary>
-        <read_only>false</read_only>
+        <read_only>true</read_only>
         <read_roles/>
         <reference display_value="" name="x_aleen_alertenter_alertenterprise_user_info">x_aleen_alertenter_alertenterprise_user_info</reference>
         <reference_cascade_rule/>
@@ -55,15 +55,15 @@
         <sys_created_on>2020-05-14 06:50:58</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>38c4038ddb381810adac9f5faa961929</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Alert User Info</sys_name>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_dictionary_x_aleen_alertenter_alertenterprise_activity_approval_task_alert_user_info</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-05-14 06:50:58</sys_updated_on>
+        <sys_updated_by>adela.cervantsz</sys_updated_by>
+        <sys_updated_on>2020-06-08 08:11:00</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
