@@ -13,15 +13,15 @@
     
 		 <div style="color: #000000 line-height: normal; font-size:large">Alert Enterprise Inc.</div>
 		 <div style="color: #000000 line-height: normal; font-size:large">4350 Starboard Drive</div>
-		  <div style="color: #000000 line-height: normal; font-size:large">Fremont, California 94538, USA</div><div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue;" href="https://alertenterprise.com/" target="_blank">https://alertenterprise.com/</a></div>
+		  <div style="color: #000000 line-height: normal; font-size:large">Fremont, California 94538, USA</div><div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue;" href="https://alertenterprise.com/" target="_blank" rel="noopener noreferrer nofollow">https://alertenterprise.com/</a></div>
        
      
      <h3 style="margin-bottom:5px;">Email Address</h3>
-     <span style="color: #000000 line-height: normal; font-size:large"><a    style="text-decoration:none; color:blue;" href="mailto:info@alertenterprise.com">info@alertenterprise.com</a></span>
+     <span style="color: #000000 line-height: normal; font-size:large"><a    style="text-decoration:none; color:blue;" href="mailto:info@alertenterprise.com" rel="noopener noreferrer nofollow">info@alertenterprise.com</a></span>
      <h3 style="margin-bottom:5px;">Support</h3>
-      <div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue; margin-bottom:-5px;" href="https://alertsupport.microsoftcrmportals.com/SignIn" target="_blank">AlertEnterprise Support Portal</a></div>
-      <div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue; margin-bottom:-5px;" href="tel:1-855-ALERT-US" >1-855-ALERT-US</a></div>
-      <div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue; margin-bottom:1px;" href="mailto:support@alertenterprise.com" >support@alertenterprise.com</a></div>
+      <div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue; margin-bottom:-5px;" href="https://alertsupport.microsoftcrmportals.com/SignIn" target="_blank" rel="noopener noreferrer nofollow">AlertEnterprise Support Portal</a></div>
+      <div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue; margin-bottom:-5px;" href="tel:1-855-ALERT-US" rel="noopener noreferrer nofollow">1-855-ALERT-US</a></div>
+      <div style="color: #000000 line-height: normal; font-size:large"><a style="text-decoration:none; color:blue; margin-bottom:1px;" href="mailto:support@alertenterprise.com" rel="noopener noreferrer nofollow">support@alertenterprise.com</a></div>
 	 
   </div>
   
@@ -36,7 +36,7 @@
         <sys_created_on>2020-06-03 22:13:28</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3096d5ffdb419c10a3b6176a4896194d</sys_id>
-        <sys_mod_count>38</sys_mod_count>
+        <sys_mod_count>39</sys_mod_count>
         <sys_name>ContactAlertEnterpriseSupport</sys_name>
         <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
         <sys_policy>read</sys_policy>
@@ -44,6 +44,6 @@
         <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
         <sys_update_name>sys_ui_page_3096d5ffdb419c10a3b6176a4896194d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-06-05 08:12:44</sys_updated_on>
+        <sys_updated_on>2020-11-11 08:57:32</sys_updated_on>
     </sys_ui_page>
 </record_update>

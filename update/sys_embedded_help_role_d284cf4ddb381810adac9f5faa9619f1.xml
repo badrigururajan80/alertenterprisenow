@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
     <sys_embedded_help_role action="INSERT_OR_UPDATE">
         <order>1000</order>
-        <role display_value="x_aleen_alertenter.alertenterprise_activity_approval_task_user" name="x_aleen_alertenter.alertenterprise_activity_approval_task_user">d684cf4ddb381810adac9f5faa9619ed</role>
+        <role/>
         <sys_class_name>sys_embedded_help_role</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-05-14 06:49:18</sys_created_on>

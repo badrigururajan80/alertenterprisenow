@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_restricted_caller_access">
+    <sys_restricted_caller_access action="INSERT_OR_UPDATE">
+        <operation>read</operation>
+        <source/>
+        <source_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</source_scope>
+        <source_table/>
+        <source_type>5</source_type>
+        <status>2</status>
+        <sys_class_name>sys_restricted_caller_access</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-11 09:12:03</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>7ccc6b57db54a010adac9f5faa961964</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>d2864ddddbdcef00adac9f5faa96198a</sys_name>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_restricted_caller_access_7ccc6b57db54a010adac9f5faa961964</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-11-11 09:12:03</sys_updated_on>
+        <target/>
+        <target_scope display_value="Human Resources: Core">d4ac3fff5b311200a4656ede91f91af2</target_scope>
+        <target_table/>
+        <target_type>3</target_type>
+    </sys_restricted_caller_access>
+</record_update>

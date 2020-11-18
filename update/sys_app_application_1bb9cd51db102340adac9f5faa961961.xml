@@ -7,7 +7,7 @@
         <hint/>
         <name>AlertEnterprise Settings</name>
         <order>100</order>
-        <roles>x_aleen_alertenter.settings_menu</roles>
+        <roles/>
         <sys_class_name>sys_app_application</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-01 07:26:26</sys_created_on>

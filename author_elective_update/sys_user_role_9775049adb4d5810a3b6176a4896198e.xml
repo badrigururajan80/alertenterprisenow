@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="DELETE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description/>
+        <elevated_privilege>false</elevated_privilege>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_aleen_alertenter.home_page_write</name>
+        <requires_subscription>-1</requires_subscription>
+        <scoped_admin>false</scoped_admin>
+        <suffix>home_page_write</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-30 00:22:54</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>9775049adb4d5810a3b6176a4896198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_aleen_alertenter.home_page_write</sys_name>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_update_name>sys_user_role_9775049adb4d5810a3b6176a4896198e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-30 00:22:54</sys_updated_on>
+    </sys_user_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</application>
+        <file_path/>
+        <instance_id>e930a3a4db4f5780cbf6d5b0cf9619fd</instance_id>
+        <instance_name>ven02573</instance_name>
+        <name>sys_user_role_9775049adb4d5810a3b6176a4896198e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role"><sys_user_role action="INSERT_OR_UPDATE"><assignable_by/><can_delegate>true</can_delegate><description/><elevated_privilege>false</elevated_privilege><grantable>true</grantable><includes_roles/><name>x_aleen_alertenter.home_page_write</name><requires_subscription>-1</requires_subscription><scoped_admin>false</scoped_admin><suffix>home_page_write</suffix><sys_class_name>sys_user_role</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-05-30 00:22:54</sys_created_on><sys_customer_update>false</sys_customer_update><sys_id>9775049adb4d5810a3b6176a4896198e</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_aleen_alertenter.home_page_write</sys_name><sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package><sys_policy/><sys_replace_on_upgrade>false</sys_replace_on_upgrade><sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope><sys_update_name>sys_user_role_9775049adb4d5810a3b6176a4896198e</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-05-30 00:22:54</sys_updated_on></sys_user_role></record_update>]]></payload>
+        <payload_hash>648965988</payload_hash>
+        <record_name>x_aleen_alertenter.home_page_write</record_name>
+        <reverted_from/>
+        <source>9286059ddbdcef00adac9f5faa961929</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-30 00:22:54</sys_created_on>
+        <sys_id>c68588dadb4d5810a3b6176a489619cc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17262f5c7940000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-30 00:22:54</sys_updated_on>
+        <type>Role</type>
+        <update_guid>028588da5e4d58109e6d5deefde9a2cc</update_guid>
+        <update_guid_history>028588da5e4d58109e6d5deefde9a2cc:648965988</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Record deleted 2020-11-17 11:57:29">c33a38e1dbaca410c34541deaa9619be</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-17 19:57:29</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_db_object display_value="" name="sys_user_role">sys_user_role</sys_db_object>
+        <sys_id>b9a345ed7f424b52a712d74b283603c4</sys_id>
+        <sys_metadata>9775049adb4d5810a3b6176a4896198e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_aleen_alertenter.home_page_write</sys_name>
+        <sys_package display_value="AlertEnterpriseNow" source="x_aleen_alertenter">d2864ddddbdcef00adac9f5faa96198a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="AlertEnterpriseNow">d2864ddddbdcef00adac9f5faa96198a</sys_scope>
+        <sys_scope_delete display_value="">7e368cb0f61b4ab299ca21a51c1f9dc4</sys_scope_delete>
+        <sys_update_name>sys_user_role_9775049adb4d5810a3b6176a4896198e</sys_update_name>
+        <sys_update_version display_value="sys_user_role_9775049adb4d5810a3b6176a4896198e">c68588dadb4d5810a3b6176a489619cc</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-11-17 19:57:29</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

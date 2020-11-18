@@ -36,7 +36,7 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-09-01 07:26:26</sys_updated_on>
         <update_access>false</update_access>
-        <user_role display_value="x_aleen_alertenter.alertenterprise_settings_user" name="x_aleen_alertenter.alertenterprise_settings_user">07b905d9dbdcef00adac9f5faa961998</user_role>
+        <user_role/>
         <ws_access>true</ws_access>
     </sys_db_object>
 </record_update>
