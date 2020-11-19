@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="AlertEnterprise User Info" max_length="40" name="x_aleen_alertenter_alertenterprise_user_info" sizeclass="204" type="collection">
+    <element label="AlertEnterprise User Info" max_length="40" name="x_aleen_alertenter_alertenterprise_user_info" sizeclass="207" type="collection">
         <element choice="1" default="Not Provisioned" label="Alert status" max_length="40" name="alert_status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Not Provisioned" value="Not Provisioned"/>

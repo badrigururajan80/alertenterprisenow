@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="sys_import_set_row" label="AlertEnteprise User Info Import Set" max_length="40" name="x_aleen_alertenter_alertenteprise_user_i" sizeclass="12" type="collection">
+    <element extends="sys_import_set_row" label="AlertEnteprise User Info Import Set" max_length="40" name="x_aleen_alertenter_alertenteprise_user_i" sizeclass="19" type="collection">
         <element attributes="import_attribute_name=alert_status,edge_encryption_enabled=true" label="Alert status" max_length="40" name="alert_status" type="string"/>
         <element attributes="import_attribute_name=alert_task,edge_encryption_enabled=true" label="Alert task" max_length="40" name="alert_task" type="string"/>
         <element attributes="import_attribute_name=alert_user_id,edge_encryption_enabled=true" label="Alert user ID" max_length="40" name="alert_user_id" type="string"/>
         <element attributes="import_attribute_name=assign_to_group,edge_encryption_enabled=true" label="Assign to group" max_length="40" name="assign_to_group" type="string"/>
         <element attributes="import_attribute_name=assign_to_user,edge_encryption_enabled=true" label="Assign to user" max_length="40" name="assign_to_user" type="string"/>
-        <element label="Badge Id" max_length="40" name="badge_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=badge_id" label="Badge Id" max_length="40" name="badge_id" type="string"/>
         <element attributes="import_attribute_name=number,edge_encryption_enabled=true" label="Number" max_length="40" name="number" type="string"/>
         <element attributes="import_attribute_name=offboarding_date,edge_encryption_enabled=true" label="Offboarding date" max_length="40" name="offboarding_date" type="string"/>
         <element attributes="import_attribute_name=offboarding_request_number,edge_encryption_enabled=true" label="Offboarding request number" max_length="40" name="offboarding_request_number" type="string"/>
@@ -13,7 +13,6 @@
         <element attributes="import_attribute_name=onboarding_request_number,edge_encryption_enabled=true" label="Onboarding request number" max_length="40" name="onboarding_request_number" type="string"/>
         <element attributes="import_attribute_name=onboard_approval_status,edge_encryption_enabled=true" label="Onboard approval status" max_length="40" name="onboard_approval_status" type="string"/>
         <element attributes="import_attribute_name=subject_person,edge_encryption_enabled=true" label="Subject person" max_length="40" name="subject_person" type="string"/>
-        <element attributes="import_attribute_name=subject_person_hr_profile,edge_encryption_enabled=true" label="Subject person HR profile" max_length="40" name="subject_person_hr_profile" type="string"/>
         <element attributes="import_attribute_name=u_userinfosysid,edge_encryption_enabled=true" label="UserInfoSysId" max_length="40" name="u_userinfosysid" type="string"/>
     </element>
 </database>
