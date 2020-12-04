@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="task" label="AlertEnterprise Activity Approval task" max_length="40" name="x_aleen_alertenter_alertenterprise_activity_approval_task" sizeclass="89" type="collection">
+    <element extends="task" label="AlertEnterprise Activity Approval task" max_length="40" name="x_aleen_alertenter_alertenterprise_activity_approval_task" sizeclass="94" type="collection">
         <element label="Alert User Info" max_length="32" name="alert_user_info" read_only="true" reference="x_aleen_alertenter_alertenterprise_user_info" type="reference"/>
         <element choice="3" label="Approval status" max_length="40" name="approval_status" type="choice">
             <choice>
