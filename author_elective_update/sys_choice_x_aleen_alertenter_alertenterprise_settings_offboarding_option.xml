@@ -41,7 +41,7 @@
             <dependent_value/>
             <element>offboarding_option</element>
             <hint/>
-            <inactive>true</inactive>
+            <inactive>false</inactive>
             <label>Call AlertEnterprise Activity</label>
             <language>en</language>
             <name>x_aleen_alertenter_alertenterprise_settings</name>
@@ -51,9 +51,9 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>e5da4591db102340adac9f5faa961909</sys_id>
-            <sys_mod_count>3</sys_mod_count>
+            <sys_mod_count>4</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-06-04 20:37:36</sys_updated_on>
+            <sys_updated_on>2020-12-09 19:55:45</sys_updated_on>
             <value>call alertenterprise activity</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">

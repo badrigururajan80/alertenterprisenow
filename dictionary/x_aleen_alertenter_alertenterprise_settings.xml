@@ -26,7 +26,7 @@
         <element choice="1" label="Offboarding option" max_length="40" name="offboarding_option" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Create Incident" sequence="1" value="create incident"/>
-                <element inactive="true" inactive_on_update="true" label="Call AlertEnterprise Activity" sequence="2" value="call alertenterprise activity"/>
+                <element inactive_on_update="false" label="Call AlertEnterprise Activity" sequence="2" value="call alertenterprise activity"/>
                 <element inactive="true" inactive_on_update="true" label="Set Employment End Date" sequence="3" value="set employment end date"/>
             </choice>
         </element>
